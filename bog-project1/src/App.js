@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import PokemonInfo from './PokemonInfo';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [pokemonId, setPokemonId] = useState(1); 
+
+    const handleNextPokemon = () => {
+        setPokemonId(prevId => prevId + 1); 
+    };
+
+    const handlePrevPokemon = () => {
+        setPokemonId(prevId => Math.max(1, prevId - 1)); 
+    };
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <PokemonInfo pokemonId={pokemonId} /> 
+                <div className="navigation">
+                    <button onClick={handlePrevPokemon}>&lt;</button>
+                    <button onClick={handleNextPokemon}>&gt;</button>
+                </div>
+            </header>
+        </div>
+    );
 }
 
 export default App;
