@@ -28,7 +28,7 @@ function PokemonInfo({ pokemonId, onNext, onPrevious }) {
             <div className='content'>
                 <div className="left-panel">
                     <div className="image-box">
-                        <img src={pokemonData.sprites.front_default} alt={pokemonData.name}/>
+                        <img src={pokemonData.sprites.front_default} alt={pokemonData.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}/>
                     </div>
                     <div className="pokemon-name">
                         {pokemonData.name.toLowerCase()}
@@ -46,26 +46,30 @@ function PokemonInfo({ pokemonId, onNext, onPrevious }) {
                 </div>
                 <div className="right-panel">
                     {activeTab === 'info' && (
-                        <div className="info-content">
-                            <div className='info'>Info</div>
-                            <ul className="stats">
-                                <li>height: {pokemonData.height} m</li>
-                                <li>weight: {pokemonData.weight} kg</li>
-                                {pokemonData.stats.map(stat => (
-                                    <li key={stat.stat.name}>{`${stat.stat.name}: ${stat.base_stat}`}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        <>
+                            <div className='info-title'>Info</div> 
+                            <div className="info-content">
+                                <ul className="stats">
+                                    <li>height: {pokemonData.height} m</li>
+                                    <li>weight: {pokemonData.weight} kg</li>
+                                    {pokemonData.stats.map(stat => (
+                                        <li key={stat.stat.name}>{`${stat.stat.name}: ${stat.base_stat}`}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </>
                     )}
                     {activeTab === 'moves' && (
-                        <div className="moves-content">
-                            <div className='moves'>Moves</div>
-                            <ul className="stats">
-                                {pokemonData.moves.map(move => (
-                                    <li key={move.move.name}>{move.move.name}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        <>
+                            <div className='moves-title'>Moves</div> 
+                            <div className="moves-content">
+                                <ul className="stats">
+                                    {pokemonData.moves.map(move => (
+                                        <li key={move.move.name}>{move.move.name}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </>
                     )}
                     <div className="buttons">
                         <button className={`button ${activeTab === 'info' ? 'active' : ''}`} onClick={() => setActiveTab('info')}>Info</button>
